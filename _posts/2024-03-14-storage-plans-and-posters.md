@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Plans and Posters
+title: 'Storage: Plans and Posters'
 tags:
 - storage
 ---
