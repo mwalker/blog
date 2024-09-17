@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Further Notes… on USB to SCSI: RXB2-001-1 / USB-DFU1</title>
+<meta name="description" content="" />
+<!-- link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<link rel="icon" href="/assets/images/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
+<link rel="canonical" href="/usb-scsi-rxb2-001-1-usb-dfu-1">
+<link rel="alternate" type="application/rss+xml" title="Further Notes…" href="/feed.xml">
+  </head>
+  <body>
+
+    <header>
+      <nav>
+  <a href="/">Further Notes…</a>
+  
+  <a href="/tags" >tags</a>
+  
+  <a href="https://pinboard.in/u:gunzel" >links</a>
+  
+  <a href="https://www.librarything.com/profile/gunzel" >library</a>
+  
+  <a href="https://github.com/mwalker" >code</a>
+  
+  <a href="/feed.xml" >rss</a>
+  
+</nav>
+
+      <h1>USB to SCSI: RXB2-001-1 / USB-DFU1</h1>
+    </header>
+
+    <main>
+
+      <p class="meta">Posted on 11 Oct 2023</p>
+
+<p>More digging around on <a href="https://auctions.yahoo.co.jp/">Yahoo Japan Auctions</a> turned a board with the ID <em>RXB2-001-1</em> that looked like it was a USB to SCSI adapter. As it was reasonably cheap I thought I would take a punt. When it arrived here it was fairly clear that is what it must be as one of the chips was stamped “adaptec”.</p>
+
+<p>I wanted to test it out with some original old SCSI drives from some old Macs but due to a number of issues I don’t have them available yet, in anticipation of something in that direction however I have also purchased a <a href="https://zuluscsi.com">ZuluSCSI</a> device, so I thought this thing may be a good thing to try.</p>
+
+<p>Plugging it in initially to a computer using the USB B port on the board and nothing showed up, it also has a barrel socket, so I figured it must need that for power. On the board I purchased “5V” was written in texta on the back, and with both USB and SCSI it seemed very likely that this was the required voltage. There also didn’t look to be anything on the board to change the voltage, and the built in molex connector only had the 5V wire connected. It was still an open question as to the polarity of the barrel connector, but some quick work with the trusty Uni-T multimeter buzzing out ground from the Molex to the outside of the barrel left me reassured it was centre positive like most I come across.</p>
+
+<p>Once powered up using the 5V DC input a device called <em>USB-DFU1</em> appeared on the USB bus, looking promising. The vendor ID is 0x04c8 which corresponds to Konica.</p>
+
+<p>Now we disconnect everything and connect up the ZuluSCSI. Powering on again and we get some flashes from the LED connected to the board but not much else. I’d realise later that the LED on the ZuluSCSI should also be flashing when it is powered. At first I fiddled with the termination, and trying the debug DIP switch on the ZuluSCSI, but getting no debug file. Do some more reading, seems the board is not supplying termination power, so we need to power the ZuluSCSI separately, which we can do through it’s USB port.</p>
+
+<p>Connect all that up and power up again, flashes from the ZuluSCSI LED this time, and lo and behold the HFS volume I have set up on the ZuluSCSI is mounted on my Snow Leopard MacBook Pro, success.</p>
+
+<p>Because the board has a couple of fly leads for connection to a power switch, and I don’t have any blades avaialable for the spade connectors I connected by using the multimeter in current mode. Without load it draws about 150-160 mA. As mentioned it can also power the drive but I did not test that as I was using the ZuluSCSI.</p>
+
+<p>Doing research I found a couple of references on the web to this board in Japanese from <a href="http://nana1451.web.fc2.com/omd.html">nana1451</a> and <a href="http://weblabo.griffonworks.net/dorlog/2nddorcom/pcat/26077.html">ひばり さん</a>, it seems likely it was originally incorporated in a product for a USB connected MO (Magneto-Optical) drive, which were very popular in Japan. Most USB MO drives I have seen come with an external adapter in a cable, usually based on the Shuttle Technologies chip.</p>
+
+
+
+<hr />
+
+<p class="meta"><a href="/tag/scsi/">#SCSI</a> <a href="/tag/usb/">#USB</a> </p>
+
+
+    </main>
+
+    <footer>
+      <p>Copyright © 1990-2024 Matthew Walker.</p>
+    </footer>
+
+  </body>
+</html>

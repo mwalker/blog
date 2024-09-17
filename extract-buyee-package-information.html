@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Further Notes… on Extract Buyee package information to a table</title>
+<meta name="description" content="" />
+<!-- link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<link rel="icon" href="/assets/images/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
+<link rel="canonical" href="/extract-buyee-package-information">
+<link rel="alternate" type="application/rss+xml" title="Further Notes…" href="/feed.xml">
+  </head>
+  <body>
+
+    <header>
+      <nav>
+  <a href="/">Further Notes…</a>
+  
+  <a href="/tags" >tags</a>
+  
+  <a href="https://pinboard.in/u:gunzel" >links</a>
+  
+  <a href="https://www.librarything.com/profile/gunzel" >library</a>
+  
+  <a href="https://github.com/mwalker" >code</a>
+  
+  <a href="/feed.xml" >rss</a>
+  
+</nav>
+
+      <h1>Extract Buyee package information to a table</h1>
+    </header>
+
+    <main>
+
+      <p class="meta">Posted on 05 Aug 2023</p>
+
+<p>I use <a href="https://buyee.jp/">Buyee</a> to purchase <s>junk</s> treasures from Japan, primarily from <a href="https://buyee.jp/mercari/">Mercari</a> and <a href="https://buyee.jp/yahoo/auction">Yahoo Japan Auctions</a>, and I have found the cheapest way to ship things back to Australia is to use their consolidation service to group multiple purchases into the one shipment to me. In the past I have manually looked at each package, opened the “Shipping Information” accordion and made notes on a bit of paper, trying to come up with the optimum combinations of purchases to consolidate to the one package for shipping. Finally I decided to make my life a bit easier and I have whipped up a little JavaScript bookmarklet to extract this info and put it in a table at the top of the page, so I can easily cut and paste it out into Excel to play with.</p>
+
+<p>My jQuery was a bit rusty and it’s still a little rough around the edges, but it make accessing this info a lot easier and saves me a bunch of time. Something I discovered is that if you have more than a page of packages (20) there seems to be a Buyee bug where it does not load the dimensions for the extra packages along with the other details. Therefore you need to change the display order and then deal with any duplicates, if you have more than 40 packages then I think you’re stuck.</p>
+
+<p>Here it is:</p>
+
+<p><a href="javascript:(function()%7Bvar%20table%20%3D%20%5B%20%20%22%3Ctable%20id%3D'gunzel'%3E%22%2C%20%20%20%20%22%3Cthead%3E%22%2C%20%20%20%20%20%20%22%3Ctr%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EId%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EDays%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EWeight%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3ELength%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EWidth%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EHeight%3C%2Fth%3E%22%2C%20%20%20%20%20%20%20%20%22%3Cth%3EDescription%3C%2Fth%3E%22%2C%20%20%20%20%20%20%22%3C%2Ftr%3E%22%2C%20%20%20%20%22%3C%2Fthead%3E%22%2C%20%20%20%20%22%3Ctbody%3E%22%5D%3B%24(%22li.luggageInfo%22).each(function(index)%20%7B%20%20var%20id%20%3D%20%24(this).attr('id')%3B%20%20var%20weight%20%3D%20%24(this).find('div.delivery_info_container%20%3E%20div.invoice_info%20%3E%20dl%20%3E%20dd%3Anth-child(6)').text().trim().replace('%2C'%2C%20'').replace(%22g%22%2C%20%22%22)%3B%20%20var%20dimensions%20%3D%20%24(this).find('div.delivery_info_container%20%3E%20div.invoice_info%20%3E%20dl%20%3E%20dd%3Anth-child(8)').text().replace(%22cm%22%2C%20%22%22).replace(%22%20%22%2C%20%22%22).trim()%3B%20%20var%20a%20%3D%20dimensions.split(%22%C3%97%22)%2C%20depth%20%3D%20a%5B0%5D%2C%20width%20%3D%20a%5B1%5D%2C%20height%20%3D%20a%5B2%5D%3B%20%20depth%20%3D%20depth%20%3F%20depth.trim()%20%3A%20''%3B%20%20width%20%3D%20width%20%3F%20width.trim()%20%3A%20''%3B%20%20height%20%3D%20height%20%3F%20height.trim()%20%3A%20''%3B%20%20var%20description%20%3D%20%24(this).find('div.luggageInfo_container%20%3E%20div.luggageInfo_order_wrap.default_order_wrap%20%3E%20table%20%3E%20tbody%20%3E%20tr%3Anth-child(2)%20%3E%20td%3Anth-child(3)').html().trim().replaceAll(%22%20%20%22%2C%20%22%22)%3B%20%20var%20days%20%3D%20%24(this).find('span.storage-remaining-days').text().trim()%3B%20%20table.push(%20%20%20%20%20%20%22%3Ctr%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20id%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20days%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20weight%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20depth%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20width%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20height%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%20%20%22%3Ctd%3E%22%20%2B%20description%20%2B%20%22%3C%2Ftd%3E%22%2C%20%20%20%20%20%20%22%3C%2Ftr%3E%22%20%20)%3B%7D)%3Btable.push(%20%20%20%20%22%3C%2Ftbody%3E%22%2C%20%20%22%3C%2Ftable%3E%22%2C%20%20%22%3Cstyle%20type%3D'text%2Fcss'%3E%22%2C%20%20%20%20%22%23gunzel%20th%2C%20%23gunzel%20td%20%7B%20padding%3A%200%205px%200%205px%3B%20%7D%22%2C%20%20%20%20%22%23gunzel%20td%20%7B%20text-align%3A%20right%3B%20%7D%22%2C%20%20%20%20%22%23gunzel%20%3E%20tbody%20%3E%20tr%20%3E%20td%3Anth-child(7)%20%7B%20text-align%3A%20left%3B%20%7D%22%2C%20%20%22%3C%2Fstyle%3E%22)%3B%24('h1.content_tit').after(table.join(%22%5Cn%22))%3B%7D)()%3B">Buyee Package Extract</a></p>
+
+<p>And a note on encoding, it seems browsers are pretty forgiving, my initial attempt for instance I manually changed all the quotes into " so it would correctly fit in the href attribute of the a tag. Thinking later I realised it is really a URL, so I think the best way is to URL encode it. Because it has both single and double quotes I was strggling with how to get it into a string to call encodeURI() with, some searching turned up a gist, and in particular this comment by @marfillaster on <a href="https://gist.github.com/jaytaylor/5a90c49e0976aadfe0726a847ce58736?permalink_comment_id=4566047#gistcomment-4566047">using jq to URI encode a string</a> which I really liked. Using this I could just pipe my source file into jq and not have to query about getting it into a string.</p>
+
+<p>Here is the raw JavaScript:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">javascript</span><span class="p">:(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="dl">"</span><span class="s2">&lt;table id='gunzel'&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;thead&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;tr&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Id&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Days&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Weight&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Length&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Width&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Height&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;th&gt;Description&lt;/th&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;/tr&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;/thead&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">&lt;tbody&gt;</span><span class="dl">"</span>
+<span class="p">];</span>
+<span class="nf">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">li.luggageInfo</span><span class="dl">"</span><span class="p">).</span><span class="nf">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">weight</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">div.delivery_info_container &gt; div.invoice_info &gt; dl &gt; dd:nth-child(6)</span><span class="dl">'</span><span class="p">).</span><span class="nf">text</span><span class="p">().</span><span class="nf">trim</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">,</span> <span class="dl">''</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2">g</span><span class="dl">"</span><span class="p">,</span> <span class="dl">""</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">div.delivery_info_container &gt; div.invoice_info &gt; dl &gt; dd:nth-child(8)</span><span class="dl">'</span><span class="p">).</span><span class="nf">text</span><span class="p">().</span><span class="nf">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2">cm</span><span class="dl">"</span><span class="p">,</span> <span class="dl">""</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">,</span> <span class="dl">""</span><span class="p">).</span><span class="nf">trim</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">dimensions</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">×</span><span class="dl">"</span><span class="p">),</span> <span class="nx">depth</span> <span class="o">=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="nx">depth</span> <span class="o">=</span> <span class="nx">depth</span> <span class="p">?</span> <span class="nx">depth</span><span class="p">.</span><span class="nf">trim</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+  <span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> <span class="p">?</span> <span class="nx">width</span><span class="p">.</span><span class="nf">trim</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+  <span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span> <span class="p">?</span> <span class="nx">height</span><span class="p">.</span><span class="nf">trim</span><span class="p">()</span> <span class="p">:</span> <span class="dl">''</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">description</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">div.luggageInfo_container &gt; div.luggageInfo_order_wrap.default_order_wrap &gt; table &gt; tbody &gt; tr:nth-child(2) &gt; td:nth-child(3)</span><span class="dl">'</span><span class="p">).</span><span class="nf">html</span><span class="p">().</span><span class="nf">trim</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">days</span> <span class="o">=</span> <span class="nf">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nf">find</span><span class="p">(</span><span class="dl">'</span><span class="s1">span.storage-remaining-days</span><span class="dl">'</span><span class="p">).</span><span class="nf">text</span><span class="p">().</span><span class="nf">trim</span><span class="p">();</span>
+  <span class="nx">table</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span>
+      <span class="dl">"</span><span class="s2">&lt;tr&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">id</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">days</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">weight</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">depth</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">width</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">height</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">&lt;td&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">description</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/td&gt;</span><span class="dl">"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">&lt;/tr&gt;</span><span class="dl">"</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">table</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span>
+    <span class="dl">"</span><span class="s2">&lt;/tbody&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">&lt;/table&gt;</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">&lt;style type='text/css'&gt;</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">#gunzel th, #gunzel td { padding: 0 5px 0 5px; }</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">#gunzel td { text-align: right; }</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">#gunzel &gt; tbody &gt; tr &gt; td:nth-child(7) { text-align: left; }</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">&lt;/style&gt;</span><span class="dl">"</span>
+<span class="p">);</span>
+<span class="nf">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">h1.content_tit</span><span class="dl">'</span><span class="p">).</span><span class="nf">after</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">));</span>
+<span class="p">})();</span>
+</code></pre></div></div>
+
+
+
+<hr />
+
+<p class="meta"><a href="/tag/bookmarklet/">#bookmarklet</a> <a href="/tag/buyee/">#Buyee</a> <a href="/tag/javascript/">#JavaScript</a> <a href="/tag/jq/">#jq</a> <a href="/tag/jquery/">#jQuery</a> <a href="/tag/mercari/">#Mercari</a> <a href="/tag/programming/">#programming</a> <a href="/tag/yahoo-japan-auctions/">#Yahoo&nbsp;Japan&nbsp;Auctions</a> </p>
+
+
+    </main>
+
+    <footer>
+      <p>Copyright © 1990-2024 Matthew Walker.</p>
+    </footer>
+
+  </body>
+</html>

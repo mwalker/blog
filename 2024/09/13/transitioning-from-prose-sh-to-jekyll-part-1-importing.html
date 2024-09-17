@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Further Notes… on Transitioning from prose.sh to jekyll</title>
+<meta name="description" content="" />
+<!-- link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<link rel="icon" href="/assets/images/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
+<link rel="canonical" href="/2024/09/13/transitioning-from-prose-sh-to-jekyll-part-1-importing.html">
+<link rel="alternate" type="application/rss+xml" title="Further Notes…" href="/feed.xml">
+  </head>
+  <body>
+
+    <header>
+      <nav>
+  <a href="/">Further Notes…</a>
+  
+  <a href="/tags" >tags</a>
+  
+  <a href="https://pinboard.in/u:gunzel" >links</a>
+  
+  <a href="https://www.librarything.com/profile/gunzel" >library</a>
+  
+  <a href="https://github.com/mwalker" >code</a>
+  
+  <a href="/feed.xml" >rss</a>
+  
+</nav>
+
+      <h1>Transitioning from prose.sh to jekyll</h1>
+    </header>
+
+    <main>
+
+      <p class="meta">Posted on 13 Sep 2024</p>
+
+<p>While I liked <a href="https://prose.sh">prose.sh</a> as a blog provider I have found that the workflow doesn’t quite suit me. I would prefer something less magical and a bit more <a href="https://boringtechnology.club">boring</a>. As the basis of <a href="https://pages.github.com">Github Pages</a> and written in ruby, a language I keep coming back to, I decided that <a href="https://jekyllrb.com">jekyll</a> qualified for me.</p>
+
+<p>There’s no way to extract the raw blog posts from prose.sh without asking them, thanksully jekyll has a fairly well developed import plugin, and I was able to crib from the existing one for tumblr to create a simple one for prose.sh posts retrieved by spidering the site. I could use the “permalink” configuaration item in the frontmatter in order to keep the old URL structure for each post.</p>
+
+<p>Setting up jekyll it seems like the github-pages version is a bit behind the latest, and I wasn’t sure I wanted to get too locked into github either, so I went with the current latest, jekyll 4.3.3. I struggled to find a them that I liked so I ended up doing my own, heavily cribbed from <a href="https://riggraz.dev/no-style-please/">no style please</a> and <a href="https://github.com/kevquirk/jekyll-simplecss-template">Jekyll Simple.css Template</a>.</p>
+
+<p>I also made use of the <a href="https://github.com/sverrirs/jekyll-paginate-v2">Jekyll::Paginate V2</a> plugin in order to paginate the posts so the front page doesn’t get unwieldy, and then discovered with its <a href="https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-AUTOPAGES.md">AutoPages</a> feature it can also generate pages for each tag (and potentially category). To get them to sort nicely I had to install the <a href="https://github.com/mslinn/jekyll_sort_natural">jekyll_sort_natural</a> plugin, because the liquid sort_natural doesn’t work for reasons I can’t quite fathom.</p>
+
+
+
+<hr />
+
+<p class="meta"><a href="/tag/prose-sh/">#prose.sh</a> <a href="/tag/jekyll/">#jekyll</a> <a href="/tag/blog-software/">#blog&nbsp;software</a> <a href="/tag/tools/">#tools</a> </p>
+
+
+    </main>
+
+    <footer>
+      <p>Copyright © 1990-2024 Matthew Walker.</p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Further Notes… on Playing with docquery</title>
+<meta name="description" content="" />
+<!-- link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<link rel="icon" href="/assets/images/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
+<link rel="canonical" href="/playing-with-docquery">
+<link rel="alternate" type="application/rss+xml" title="Further Notes…" href="/feed.xml">
+  </head>
+  <body>
+
+    <header>
+      <nav>
+  <a href="/">Further Notes…</a>
+  
+  <a href="/tags" >tags</a>
+  
+  <a href="https://pinboard.in/u:gunzel" >links</a>
+  
+  <a href="https://www.librarything.com/profile/gunzel" >library</a>
+  
+  <a href="https://github.com/mwalker" >code</a>
+  
+  <a href="/feed.xml" >rss</a>
+  
+</nav>
+
+      <h1>Playing with docquery</h1>
+    </header>
+
+    <main>
+
+      <p class="meta">Posted on 03 Sep 2022</p>
+
+<p>I seem to be on an AI kick lately. I came across <a href="https://www.impira.com/blog/hey-machine-whats-my-invoice-total">DocQuery</a>, an open source AI tool for asking questions about documents. I thought I’d give it a go.</p>
+
+<p>The instructions in the github repo worked fine, although if you’re doing other AI stuff I think it is worth setting up a virtualenv for it to livein:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m virtualenv venv
+source venv/bin/activate
+</code></pre></div></div>
+
+<p>I also found I needed to install poppler via homebrew as various python librarries rely on some of popplers utils (and poppler specifically, xpdf is not enough):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install poppler
+</code></pre></div></div>
+
+<p>Running queries on modern documents it was pretty good, although it did struggle to understand GST. When I used some historical documents it struggled, partly I think because of a difficult OCR problem, and partly that the structure of the ones I tried differs from the modern kind of business document.</p>
+
+<p>The integration with <a href="https://arxiv.org/abs/2111.15664">Donut</a> looks very interesting, but I struggled to get it to work due to dependency issues. I suspect I need to set up containers or VMs to run this stuff in so system level libraries can be isolated as well.</p>
+
+<p>Definitely something to keep an eye on.</p>
+
+
+
+<hr />
+
+<p class="meta"><a href="/tag/docquery/">#docquery</a> <a href="/tag/ai/">#ai</a> <a href="/tag/ocr/">#ocr</a> </p>
+
+
+    </main>
+
+    <footer>
+      <p>Copyright © 1990-2024 Matthew Walker.</p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Further Notes… on Amazon International Search</title>
+<meta name="description" content="Amazon JP items (not everything, especially not DVD and BluRay) are now available through Amazon AU with Prime shipping, but it can be hard to search for what you want, thanks to a comment from ohdear on OzBargain there is a way to set up a nifty form to search the overseas Amazon of your choice, in my case Japan." />
+<!-- link rel="stylesheet" href="https://cdn.simplecss.org/simple.css" -->
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<link rel="icon" href="/assets/images/favicon.png" />
+<link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
+<link rel="canonical" href="/amazon-international-search">
+<link rel="alternate" type="application/rss+xml" title="Further Notes…" href="/feed.xml">
+  </head>
+  <body>
+
+    <header>
+      <nav>
+  <a href="/">Further Notes…</a>
+  
+  <a href="/tags" >tags</a>
+  
+  <a href="https://pinboard.in/u:gunzel" >links</a>
+  
+  <a href="https://www.librarything.com/profile/gunzel" >library</a>
+  
+  <a href="https://github.com/mwalker" >code</a>
+  
+  <a href="/feed.xml" >rss</a>
+  
+</nav>
+
+      <h1>Amazon International Search</h1>
+    </header>
+
+    <main>
+
+      <p class="meta">Posted on 16 Jun 2023</p>
+
+<h2 id="search-amazon-jp-via-amazon-au-">Search Amazon JP via Amazon AU <a href="#search-amazon-jp-via-amazon-au">#</a></h2>
+
+<p>Amazon JP items (not everything, especially not DVD and BluRay) are now available through Amazon AU with Prime shipping, but it can be hard to search for what you want, thanks to <a href="https://www.ozbargain.com.au/node/780346">a comment from ohdear on OzBargain</a> there is a way to set up a nifty form to search the overseas Amazon of your choice, in my case Japan.</p>
+
+<p>Try it:</p>
+
+<form action="http://www.amazon.com.au/gp/search" method="get">
+  <input type="text" name="k" value="" />
+  <input type="hidden" name="rh" value="p_6:A2K69GP4EI3XWZ" />
+  <input type="submit" value="Search" />
+</form>
+
+<p>If you want to embed it somewhere else the code looks like:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"http://www.amazon.com.au/gp/search"</span> <span class="na">method=</span><span class="s">"get"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"k"</span> <span class="na">value=</span><span class="s">""</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"rh"</span> <span class="na">value=</span><span class="s">"p_6:A2K69GP4EI3XWZ"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Search"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+
+<p>There’s more in ohdear’s comment about other Amazons, and multiple Amazons at once.</p>
+
+
+
+<hr />
+
+<p class="meta"><a href="/tag/amazon/">#amazon</a> </p>
+
+
+    </main>
+
+    <footer>
+      <p>Copyright © 1990-2024 Matthew Walker.</p>
+    </footer>
+
+  </body>
+</html>
