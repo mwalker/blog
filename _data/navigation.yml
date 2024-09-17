@@ -1,0 +1,10 @@
+- name: tags
+  link: /tags
+- name: links
+  link: https://pinboard.in/u:gunzel
+- name: library
+  link: https://www.librarything.com/profile/gunzel
+- name: code
+  link: https://github.com/mwalker
+- name: rss
+  link: /feed.xml 
