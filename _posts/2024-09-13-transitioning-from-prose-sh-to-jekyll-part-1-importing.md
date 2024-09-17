@@ -6,6 +6,7 @@ tags:
 - jekyll
 - blog software
 - tools
+- github
 ---
 
 While I liked [prose.sh](https://prose.sh) as a blog provider I have found that the workflow doesn't quite suit me. I would prefer something less magical and a bit more [boring](https://boringtechnology.club). As the basis of [Github Pages](https://pages.github.com) and written in ruby, a language I keep coming back to, I decided that [jekyll](https://jekyllrb.com) qualified for me.
@@ -16,4 +17,4 @@ Setting up jekyll it seems like the github-pages version is a bit behind the lat
 
 I also made use of the [Jekyll::Paginate V2](https://github.com/sverrirs/jekyll-paginate-v2) plugin in order to paginate the posts so the front page doesn't get unwieldy, and then discovered with its [AutoPages](https://github.com/sverrirs/jekyll-paginate-v2/blob/master/README-AUTOPAGES.md) feature it can also generate pages for each tag (and potentially category). To get them to sort nicely I had to install the [jekyll_sort_natural](https://github.com/mslinn/jekyll_sort_natural) plugin, because the liquid sort_natural doesn't work for reasons I can't quite fathom.
 
-
+Getting it actually deployed on guthub was a bit of a pain, but after a bunch of clicking around it seems to be working. It's mostly a combination of [jekyll-action-ts](https://github.com/limjh16/jekyll-action-ts) and the [github pages action](https://github.com/peaceiris/actions-gh-pages) combined in a github action job.
