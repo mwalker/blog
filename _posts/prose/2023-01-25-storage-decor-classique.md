@@ -27,5 +27,5 @@ I get mine now from [Mitre 10](https://www.mitre10.com.au/decor-classique-storag
 
 They are branded [décor](https://www.decor.com.au/) now but were [Willow](https://www.willow.com.au) branded in the past, it seems they moved when [Marlin Brands acquired décor and then Willow](https://www.marlinbrands.com.au/story).
 
-This is the first in a series on the [storage](https://blog.gunzel.org/?tag=storage) solutions that work for me.
+This is the first in a series on the [storage](/tag/storage/) solutions that work for me.
 
