@@ -7,7 +7,7 @@ tags:
 - storage
 ---
 
-Organising all my junk treasures I have of course delved deeply into the world of the best way to store all this stuff, in a way that I can find and access it, it's still a journey (I need an index) but I thought I'd share some of the things that work for me.
+Organising all my <s>junk</s> treasures I have of course delved deeply into the world of the best way to store all this stuff, in a way that I can find and access it, it's still a journey (I need an index) but I thought I'd share some of the things that work for me.
 
 First up are [décor (née Willow) Classique storage tubs](https://www.decor.com.au/home-organisation/home-storage/). Compared to any other clear tub I have seen or used these are the best, they are tough, don't seem to become brittle and shatter, stack well even when loaded up fairly heavy, and the handles make them pretty easy to carry. The lids stay on very well for having no moving parts, but they won't tolerate much upward force from inside.
 
