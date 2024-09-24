@@ -7,6 +7,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '42 18 * * *'
+  workflow_dispatch:  # Add this line to enable manual triggers
 
 jobs:
   jekyll:
