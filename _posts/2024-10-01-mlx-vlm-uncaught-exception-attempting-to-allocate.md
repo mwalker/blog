@@ -24,4 +24,8 @@ After a fruitless process of quitting all other apps, disconnecting the external
 
 Now I'm waiting for the weights of Qwen2-VL-7B-Instruct to download to see if that will run, and if so what the limits on image size are, and what the speed is like. Hopefully I will then have something I can run on demand.
 
-Thinking about a dedicated machine to run this on I came across this [nifty calculator](https://llm-calc.rayfernando.ai) and some [interesting benchmarks](https://github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference) that make me think Apple Silicon may be a viable option for me.
+Update: Qwen2-VL-7B-Instruct does run, but it's fairly glacial at around 1t/s for the prompt and 2.5t/s for generation. That's somewhere around an order of magnitude slower than using Hugging Face spaces for me. It seems to top out at using around 26GB of RAM with a 2000 pixel image, so a 24GB Mac mini is not going to be enough for regular use.
+
+With a 1000 pixel image those numbers become 20.5GB, around 5t/s for the prompt and 4t/s for the generation.
+
+Thinking about a dedicated machine to run this on I came across this [nifty calculator](https://llm-calc.rayfernando.ai) and some [interesting benchmarks](https://github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference). It seems Apple Silicon is always on the slower end, and the price jumps significantly once you want to get past 24GB of RAM, so maybe it's a ot yet.
