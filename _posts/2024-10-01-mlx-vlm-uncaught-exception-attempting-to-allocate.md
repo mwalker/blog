@@ -28,4 +28,4 @@ Update: Qwen2-VL-7B-Instruct does run, but it's fairly glacial at around 1t/s fo
 
 With a 1000 pixel image those numbers become 20.5GB, around 5t/s for the prompt and 4t/s for the generation.
 
-Thinking about a dedicated machine to run this on I came across this [nifty calculator](https://llm-calc.rayfernando.ai) and some [interesting benchmarks](https://github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference). It seems Apple Silicon is always on the slower end, and the price jumps significantly once you want to get past 24GB of RAM, so maybe it's a ot yet.
+Thinking about a dedicated machine to run this on I came across this [nifty calculator](https://llm-calc.rayfernando.ai) and some [interesting benchmarks](https://github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference). It seems Apple Silicon is always on the slower end, and the price jumps significantly once you want to get past 24GB of RAM, so maybe it's a not yet.
